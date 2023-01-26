@@ -14,33 +14,33 @@ interface TextField extends FieldProps {
   fieldProps: TextFieldProps;
 }
 
-const Password: React.FC<TextField> = ({ fieldProps, formikProps }) => {
+const ConfirmPassword: React.FC<TextField> = ({ fieldProps, formikProps }) => {
   const { header, helperText } = fieldProps;
-  const fieldValue = get(formikProps, `values.value`) as "";
-  const fieldError = get(formikProps, `errors.value`) as string;
-  // const errorFlag = !!fieldError;
+
+  const fieldErrorpass = get(formikProps, `errors.confirm`) as string;
+  const fieldValuepass = get(formikProps, `values.confirm`) as "";
 
   console.log(formikProps);
 
   return (
-    <div className="password-field">
-      {header && <label className="password-header">{header}</label>}
+    <div className="confirmpassword">
+      {header && <label className="confirm-password-header">{header}</label>}
       <div>
         <input
           type="password"
-          name="value"
-          value={fieldValue}
+          name="confirm"
+          value={fieldValuepass}
           onBlur={formikProps.handleBlur}
           onChange={formikProps.handleChange}
         />
       </div>
-      {fieldError ? (
-        <span className="password-fieldError">{fieldError}</span>
+      {fieldErrorpass ? (
+        <span className="confirmpassword-fieldError">{fieldErrorpass}</span>
       ) : (
-        <span className="password-helpertext">{helperText}</span>
+        <span className="confirmpassword-helpertext">{helperText}</span>
       )}
     </div>
   );
 };
 
-export default Password;
+export default ConfirmPassword;

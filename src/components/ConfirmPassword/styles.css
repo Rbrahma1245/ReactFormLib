@@ -1,18 +1,14 @@
-
-.TextField-header {
+.confirmpassword-header {
     font-size: 18px;
     color: rgb(77, 103, 208);
 }
-
-.TextField-fieldError {
+.confirmpassword-fieldError {
     margin-top: 0;
     font-size: 12px;
     color: rgb(240, 64, 102);
 }
-
-.TextField-helpertext {
+.confirmpassword-helpertext {
     font-size: 12px;
     color: rgb(77, 103, 208);
-
 }
 

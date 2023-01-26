@@ -4,6 +4,7 @@ import "./App.css";
 import * as yup from "yup";
 import TextField, { TextFieldProps } from "./components/TextField";
 import Password from "./components/Password";
+import ConfirmPassword from "./components/ConfirmPassword";
 
 const fieldProps: TextFieldProps = {
   header: "Label",
@@ -18,9 +19,9 @@ const App = () => {
     value: yup
       .string()
       .min(5, "Password must be 5 characters long")
-      .matches(/[0-9]/, "Password requires a number")
       .matches(/[a-z]/, "Password requires a lowercase letter")
       .matches(/[A-Z]/, "Password requires an uppercase letter")
+      .matches(/[0-9]/, "Password requires a number")
       .matches(/[^\w]/, "Password requires a symbol")
       .required("Required"),
     confirm: yup
@@ -47,6 +48,10 @@ const App = () => {
               {/* <TextField formikProps={formikProp} fieldProps={fieldProps} /> */}
 
               <Password formikProps={formikProp} fieldProps={fieldProps} />
+              <ConfirmPassword
+                formikProps={formikProp}
+                fieldProps={fieldProps}
+              />
 
               <button className="btn-submit" type="submit">
                 Submit

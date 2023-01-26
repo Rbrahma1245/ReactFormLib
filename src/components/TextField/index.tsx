@@ -24,8 +24,8 @@ const TextField: React.FC<TextField> = ({ fieldProps, formikProps }) => {
   console.log(formikProps);
 
   return (
-    <div>
-      {header && <label className="header">{header}</label>}
+    <div className="TextField">
+      {header && <label className="TextField-header">{header}</label>}
       <div>
         <input
           type="text"
@@ -39,9 +39,9 @@ const TextField: React.FC<TextField> = ({ fieldProps, formikProps }) => {
       {(errorFlag || helperText) && (
         <div className="label-error">
           {errorFlag ? (
-            <span className="fieldError">{fieldError}</span>
+            <span className="TextField-fieldError">{fieldError}</span>
           ) : (
-            <span className="helpertext">{helperText} </span>
+            <span className="TextField-helpertext">{helperText} </span>
           )}
         </div>
       )}
