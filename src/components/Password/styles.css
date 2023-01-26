@@ -1,0 +1,28 @@
+.menu-options {
+    text-align: left;
+}
+
+.header {
+    font-size: 18px;
+    color: rgb(77, 103, 208);
+}
+
+.options {
+    display: flex;
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.fieldError {
+    margin-top: 0;
+    font-size: 12px;
+    color: rgb(240, 64, 102);
+}
+
+.helpertext {
+    font-size: 12px;
+    color: rgb(77, 103, 208);
+
+}
+
