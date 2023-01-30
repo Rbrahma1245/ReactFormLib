@@ -1,19 +1,19 @@
-
 .password-header {
     font-size: 18px;
     color: rgb(77, 103, 208);
 }
-
-
 .password-error  {
     margin-top: 0;
     font-size: 12px;
     color: rgb(240, 64, 102);
 }
-
 .password-helper{
     font-size: 12px;
     color: rgb(77, 103, 208);
+}
 
+.full{
+    width: 50%;
+    height: 20px;
 }
 

@@ -1,6 +1,7 @@
 import { get } from "lodash";
 import React from "react";
 import "./styles.css";
+import clsx from "clsx";
 import { FieldProps } from "../Types";
 import { getFieldError } from "../../Utils";
 
@@ -9,6 +10,7 @@ export interface TextFieldProps {
   name: string;
   helperText?: string;
   type?: number | string;
+  width?: string;
 }
 
 interface TextField extends FieldProps {
@@ -25,7 +27,7 @@ const TextField: React.FC<TextField> = ({ fieldProps, formikProps }) => {
   return (
     <div className="text-field">
       {header && <label className="text-header">{header}</label>}
-      <div>
+      <div className={clsx()}>
         <input
           type="text"
           name={name}

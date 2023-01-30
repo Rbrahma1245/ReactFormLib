@@ -2,49 +2,87 @@ import React from "react";
 import { Formik } from "formik";
 import "./App.css";
 import * as yup from "yup";
-import TextField, { TextFieldProps } from "./components/TextField";
-import Password from "./components/Password";
-// import ConfirmPassword from "./components/ConfirmPassword";
+// import TextField, { TextFieldProps } from "./components/TextField";
+import ArrayField, { FieldArrayProps } from "./components/FieldArray";
+// import Password, { TextFieldProps } from "./components/Password";
 
-const fieldProps: TextFieldProps = {
+// const fieldProps: TextFieldProps = {
+//   header: "Label",
+//   name: "fieldName",
+//   helperText: "Enter your text",
+//   type: "hello",
+//   width: "full",
+//   // itemType: "string",
+// };
+
+// const confirmPassword: TextFieldProps = {
+//   header: "password",
+//   name: "confirm",
+//   helperText: "Enter your password",
+//   type: "hello",
+//   width: "full",
+// };
+
+const fieldPropss: FieldArrayProps = {
   header: "Label",
   name: "fieldName",
   helperText: "Enter your text",
-  type: "hello",
-};
-
-const confirmPassword: TextFieldProps = {
-  header: "password",
-  name: "confirm",
-  helperText: "Enter your password",
-  type: "hello",
+  itemType: "string",
 };
 
 const App = () => {
   const FormSchema = yup.object({
     // fieldName: yup.string().required("Invalid"),
-    fieldName: yup
-      .string()
-      .min(5, "Password must be 5 characters long")
-      .matches(/[a-z]/, "Password requires a lowercase letter")
-      .matches(/[A-Z]/, "Password requires an uppercase letter")
-      .matches(/[0-9]/, "Password requires a number")
-      .matches(/[^\w]/, "Password requires a symbol")
-      .required("Required"),
-    confirm: yup
-      .string()
-      .oneOf([yup.ref("fieldName"), null], ' "Password" did not match ')
-      .required("Required"),
+    // fieldName: yup
+    //   .string()
+    //   .min(5, "Password must be 5 characters long")
+    //   .matches(/[a-z]/, "Password requires a lowercase letter")
+    //   .matches(/[A-Z]/, "Password requires an uppercase letter")
+    //   .matches(/[0-9]/, "Password requires a number")
+    //   .matches(/[^\w]/, "Password requires a symbol")
+    //   .required("Password Required"),
+    // confirm: yup
+    //   .string()
+    //   .oneOf([yup.ref("fieldName"), null], ' "Password" did not match ')
+    //   .required("Invalid"),
   });
+
+  // const name = [
+  //   {
+  //     fieldName: ["apple", "orange", "mango"],
+  //   },
+  // ];
+
+  // const fieldName = ["apple", "orange", "mango"];
+
+  // const fieldName = [
+  //   { fieldName: "apple", type: "fruits" },
+  //   { fieldName: "mango", type: "fruits" },
+  //   { fieldName: "orange", type: "fruits" },
+  //   { fieldName: "kiwi", type: "fruits" },
+  // ];
+
+  const fieldName = {
+    fieldName: [
+      { fieldName: "apple", type: "fruits" },
+      { fieldName: "mango", type: "fruits" },
+      { fieldName: "orange", type: "fruits" },
+      { fieldName: "kiwi", type: "fruits" },
+    ],
+  };
 
   return (
     <div>
       <Formik
-        initialValues={{
-          fieldName: "",
-          confirm: "",
-        }}
-        validationSchema={FormSchema}
+        // initialValues={{
+        //   fieldName: "",
+        //   // confirm: "",
+        // }}
+
+        // initialValues={{ fieldName: ["apple", "orange", "mango"] }}
+        // validationSchema={FormSchema}
+
+        initialValues={fieldName}
         onSubmit={(data) => {
           console.log(data);
         }}
@@ -54,12 +92,14 @@ const App = () => {
             <form className="form" onSubmit={formikProp.handleSubmit}>
               {/* <TextField formikProps={formikProp} fieldProps={fieldProps} /> */}
 
-              <Password formikProps={formikProp} fieldProps={fieldProps} />
-              <Password formikProps={formikProp} fieldProps={confirmPassword} />
+              {/* <Password formikProps={formikProp} fieldProps={fieldProps} />
+              <Password formikProps={formikProp} fieldProps={confirmPassword} /> */}
 
-              <button className="btn-submit" type="submit">
+              <ArrayField formikProps={formikProp} fieldProps={fieldPropss} />
+
+              {/* <button className="btn-submit" type="submit">
                 Submit
-              </button>
+              </button> */}
             </form>
           );
         }}

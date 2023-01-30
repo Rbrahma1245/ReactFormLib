@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "clsx": "^1.2.1",
     "eslint-config": "^0.3.0",
     "formik": "^2.2.9",
     "lodash": "^4.17.21",
