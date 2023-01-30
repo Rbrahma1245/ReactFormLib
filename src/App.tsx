@@ -4,19 +4,26 @@ import "./App.css";
 import * as yup from "yup";
 import TextField, { TextFieldProps } from "./components/TextField";
 import Password from "./components/Password";
-import ConfirmPassword from "./components/ConfirmPassword";
+// import ConfirmPassword from "./components/ConfirmPassword";
 
 const fieldProps: TextFieldProps = {
   header: "Label",
-  name: "Name",
+  name: "fieldName",
   helperText: "Enter your text",
+  type: "hello",
+};
+
+const confirmPassword: TextFieldProps = {
+  header: "password",
+  name: "confirm",
+  helperText: "Enter your password",
   type: "hello",
 };
 
 const App = () => {
   const FormSchema = yup.object({
-    // value: yup.string().required("Invalid"),
-    value: yup
+    // fieldName: yup.string().required("Invalid"),
+    fieldName: yup
       .string()
       .min(5, "Password must be 5 characters long")
       .matches(/[a-z]/, "Password requires a lowercase letter")
@@ -26,7 +33,7 @@ const App = () => {
       .required("Required"),
     confirm: yup
       .string()
-      .oneOf([yup.ref("value"), null], ' "Password" did not match ')
+      .oneOf([yup.ref("fieldName"), null], ' "Password" did not match ')
       .required("Required"),
   });
 
@@ -34,7 +41,7 @@ const App = () => {
     <div>
       <Formik
         initialValues={{
-          value: "",
+          fieldName: "",
           confirm: "",
         }}
         validationSchema={FormSchema}
@@ -48,10 +55,7 @@ const App = () => {
               {/* <TextField formikProps={formikProp} fieldProps={fieldProps} /> */}
 
               <Password formikProps={formikProp} fieldProps={fieldProps} />
-              <ConfirmPassword
-                formikProps={formikProp}
-                fieldProps={fieldProps}
-              />
+              <Password formikProps={formikProp} fieldProps={confirmPassword} />
 
               <button className="btn-submit" type="submit">
                 Submit

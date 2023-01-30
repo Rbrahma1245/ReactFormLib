@@ -2,6 +2,7 @@ import { get } from "lodash";
 import React from "react";
 import "./styles.css";
 import { FieldProps } from "../Types";
+import { getFieldError } from "../../Utils";
 
 export interface TextFieldProps {
   header: string;
@@ -9,18 +10,15 @@ export interface TextFieldProps {
   helperText?: string;
   type?: number | string;
 }
-
 interface TextField extends FieldProps {
   fieldProps: TextFieldProps;
 }
 
 const Password: React.FC<TextField> = ({ fieldProps, formikProps }) => {
-  const { header, helperText } = fieldProps;
-  const fieldValue = get(formikProps, `values.value`) as "";
-  const fieldError = get(formikProps, `errors.value`) as string;
-  // const errorFlag = !!fieldError;
-
-  console.log(formikProps);
+  const { header, helperText, name } = fieldProps;
+  const fieldValue = get(formikProps, `values.${name}`) as string;
+  const fieldError = getFieldError(name || "", formikProps);
+  const errorFlag = !!fieldError;
 
   return (
     <div className="password-field">
@@ -28,16 +26,22 @@ const Password: React.FC<TextField> = ({ fieldProps, formikProps }) => {
       <div>
         <input
           type="password"
-          name="value"
+          autoComplete="off"
+          name={name}
           value={fieldValue}
           onBlur={formikProps.handleBlur}
           onChange={formikProps.handleChange}
         />
       </div>
-      {fieldError ? (
-        <span className="password-fieldError">{fieldError}</span>
-      ) : (
-        <span className="password-helpertext">{helperText}</span>
+
+      {(errorFlag || helperText) && (
+        <div className="label-error">
+          {errorFlag ? (
+            <span className="password-error error">{fieldError}</span>
+          ) : (
+            <span className="password-helper helpertext">{helperText} </span>
+          )}
+        </div>
       )}
     </div>
   );

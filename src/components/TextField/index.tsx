@@ -2,6 +2,7 @@ import { get } from "lodash";
 import React from "react";
 import "./styles.css";
 import { FieldProps } from "../Types";
+import { getFieldError } from "../../Utils";
 
 export interface TextFieldProps {
   header: string;
@@ -15,21 +16,19 @@ interface TextField extends FieldProps {
 }
 
 const TextField: React.FC<TextField> = ({ fieldProps, formikProps }) => {
-  const { header, helperText } = fieldProps;
+  const { header, helperText, name } = fieldProps;
 
-  const fieldValue = get(formikProps, `values.value`) as "";
-  const fieldError = get(formikProps, `errors.value`) as string;
+  const fieldValue = get(formikProps, `values.${name}`) as string;
+  const fieldError = getFieldError(name || "", formikProps);
   const errorFlag = !!fieldError;
 
-  console.log(formikProps);
-
   return (
-    <div className="TextField">
-      {header && <label className="TextField-header">{header}</label>}
+    <div className="text-field">
+      {header && <label className="text-header">{header}</label>}
       <div>
         <input
           type="text"
-          name="value"
+          name={name}
           value={fieldValue}
           onBlur={formikProps.handleBlur}
           onChange={formikProps.handleChange}
@@ -39,9 +38,9 @@ const TextField: React.FC<TextField> = ({ fieldProps, formikProps }) => {
       {(errorFlag || helperText) && (
         <div className="label-error">
           {errorFlag ? (
-            <span className="TextField-fieldError">{fieldError}</span>
+            <span className="text-error error">{fieldError}</span>
           ) : (
-            <span className="TextField-helpertext">{helperText} </span>
+            <span className="text-helper helpertext">{helperText} </span>
           )}
         </div>
       )}

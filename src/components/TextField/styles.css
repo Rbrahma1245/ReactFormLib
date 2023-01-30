@@ -1,16 +1,16 @@
 
-.TextField-header {
+.text-header {
     font-size: 18px;
     color: rgb(77, 103, 208);
 }
 
-.TextField-fieldError {
+.text-error  {
     margin-top: 0;
     font-size: 12px;
     color: rgb(240, 64, 102);
 }
 
-.TextField-helpertext {
+.text-helper {
     font-size: 12px;
     color: rgb(77, 103, 208);
 
