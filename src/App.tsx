@@ -3,17 +3,19 @@ import { Formik } from "formik";
 import "./App.css";
 import * as yup from "yup";
 // import TextField, { TextFieldProps } from "./components/TextField";
-import ArrayField, { FieldArrayProps } from "./components/FieldArray";
+// import ArrayField, { FieldArrayProps } from "./components/FieldArray";
+import PhoneField from "./components/PhoneField";
+import { TextFieldProps } from "./components/TextField";
 // import Password, { TextFieldProps } from "./components/Password";
 
-// const fieldProps: TextFieldProps = {
-//   header: "Label",
-//   name: "fieldName",
-//   helperText: "Enter your text",
-//   type: "hello",
-//   width: "full",
-//   // itemType: "string",
-// };
+const fieldProps: TextFieldProps = {
+  header: "Label",
+  name: "fieldName",
+  helperText: "Enter your text",
+  type: "hello",
+  width: "full",
+  // itemType: "string",
+};
 
 // const confirmPassword: TextFieldProps = {
 //   header: "password",
@@ -23,16 +25,23 @@ import ArrayField, { FieldArrayProps } from "./components/FieldArray";
 //   width: "full",
 // };
 
-const fieldPropss: FieldArrayProps = {
-  header: "Label",
-  name: "fieldName",
-  helperText: "Enter your text",
-  itemType: "string",
-};
+// const fieldPropss: FieldArrayProps = {
+//   header: "Label",
+//   name: "fieldName",
+//   helperText: "Enter your text",
+//   itemType: "string",
+// };
 
 const App = () => {
+  // const phoneRegExp =
+  //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const FormSchema = yup.object({
-    // fieldName: yup.string().required("Invalid"),
+    fieldName: yup
+      .string()
+
+      // .matches(phoneRegExp, "Phone number is not valid")
+
+      .required("Phone number is required"),
     // fieldName: yup
     //   .string()
     //   .min(5, "Password must be 5 characters long")
@@ -62,27 +71,25 @@ const App = () => {
   //   { fieldName: "kiwi", type: "fruits" },
   // ];
 
-  const fieldName = {
-    fieldName: [
-      { fieldName: "apple", type: "fruits" },
-      { fieldName: "mango", type: "fruits" },
-      { fieldName: "orange", type: "fruits" },
-      { fieldName: "kiwi", type: "fruits" },
-    ],
-  };
+  // const fieldName = {
+  //   fieldName: [
+  //     { fieldName: "apple", type: "fruits" },
+  //     { fieldName: "mango", type: "fruits" },
+  //     { fieldName: "orange", type: "fruits" },
+  //     { fieldName: "kiwi", type: "fruits" },
+  //   ],
+  // };
 
   return (
     <div>
       <Formik
-        // initialValues={{
-        //   fieldName: "",
-        //   // confirm: "",
-        // }}
-
+        initialValues={{
+          fieldName: "",
+          // confirm: "",
+        }}
         // initialValues={{ fieldName: ["apple", "orange", "mango"] }}
-        // validationSchema={FormSchema}
-
-        initialValues={fieldName}
+        validationSchema={FormSchema}
+        // initialValues={fieldName}
         onSubmit={(data) => {
           console.log(data);
         }}
@@ -95,11 +102,13 @@ const App = () => {
               {/* <Password formikProps={formikProp} fieldProps={fieldProps} />
               <Password formikProps={formikProp} fieldProps={confirmPassword} /> */}
 
-              <ArrayField formikProps={formikProp} fieldProps={fieldPropss} />
+              {/* <ArrayField formikProps={formikProp} fieldProps={fieldPropss} /> */}
 
-              {/* <button className="btn-submit" type="submit">
+              <PhoneField formikProps={formikProp} fieldProps={fieldProps} />
+
+              <button className="btn-submit" type="submit">
                 Submit
-              </button> */}
+              </button>
             </form>
           );
         }}
