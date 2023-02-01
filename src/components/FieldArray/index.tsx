@@ -1,8 +1,8 @@
 import React from "react";
 import { get } from "lodash";
-import "./styles.css";
+import "./styles.scss";
 import { FieldArray, FieldArrayRenderProps } from "formik";
-import { FieldProps } from "../Types";
+import { FormikFieldProps } from "../Types";
 import { getComponentConfig } from "../../Utils";
 
 export interface FieldArrayProps {
@@ -18,18 +18,17 @@ export interface FieldArrayProps {
   onRemoveButtonClick?: (index: number) => Promise<boolean>;
 }
 
-interface FieldsArrayprops extends FieldProps {
+interface FieldsArrayprops extends FormikFieldProps {
   fieldProps: FieldArrayProps;
 }
 
-const ArrayField: React.FC<FieldsArrayprops> = ({
-  fieldProps = {} as FieldArrayProps,
-  formikProps,
-}) => {
+const ArrayField: React.FC<FieldsArrayprops> = (props) => {
+  const { fieldProps = {} as FieldArrayProps, formikProps } = props;
+
   const {
     addButtonText = "Add",
     header,
-    helperText,
+    // helperText,
     name,
     itemType,
     addButton,

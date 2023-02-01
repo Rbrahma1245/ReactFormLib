@@ -2,7 +2,7 @@ import { get } from "lodash";
 import React from "react";
 import "./styles.css";
 import clsx from "clsx";
-import { FieldProps } from "../Types";
+import { FormikFieldProps } from "../Types";
 import { getFieldError } from "../../Utils";
 
 export interface TextFieldProps {
@@ -13,13 +13,14 @@ export interface TextFieldProps {
   width?: string;
 }
 
-interface TextField extends FieldProps {
+interface TextFieldsProps extends FormikFieldProps {
   fieldProps: TextFieldProps;
 }
 
-const TextField: React.FC<TextField> = ({ fieldProps, formikProps }) => {
-  const { header, helperText, name } = fieldProps;
+const TextField: React.FC<TextFieldsProps> = (props) => {
+  const { fieldProps = {} as TextFieldProps, formikProps } = props;
 
+  const { header, helperText, name, width } = fieldProps;
   const fieldValue = get(formikProps, `values.${name}`) as string;
   const fieldError = getFieldError(name || "", formikProps);
   const errorFlag = !!fieldError;
@@ -29,6 +30,7 @@ const TextField: React.FC<TextField> = ({ fieldProps, formikProps }) => {
       {header && <label className="text-header">{header}</label>}
       <div className={clsx()}>
         <input
+          className={clsx(width == "full" ? "full" : undefined)}
           type="text"
           name={name}
           value={fieldValue}

@@ -1,5 +1,5 @@
 import { FormikProps } from "formik";
 
-export interface FieldProps {
+export interface FormikFieldProps {
   formikProps: FormikProps<any>;
 }

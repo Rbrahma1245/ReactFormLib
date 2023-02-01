@@ -1,22 +1,24 @@
 import { get } from "lodash";
 import React from "react";
-import "./styles.css";
+import "./styles.scss";
 import clsx from "clsx";
-import { FieldProps } from "../Types";
+import { FormikFieldProps } from "../Types";
 import { getFieldError } from "../../Utils";
 
-export interface TextFieldProps {
+export interface PasswordFieldProps {
   header: string;
   name: string;
   helperText?: string;
   type?: number | string;
   width?: string;
 }
-interface TextField extends FieldProps {
-  fieldProps: TextFieldProps;
+interface PasswordFieldsProps extends FormikFieldProps {
+  fieldProps: PasswordFieldProps;
 }
 
-const Password: React.FC<TextField> = ({ fieldProps, formikProps }) => {
+const Password: React.FC<PasswordFieldsProps> = (props) => {
+  const { fieldProps = {} as PasswordFieldProps, formikProps } = props;
+
   const { header, helperText, name, width } = fieldProps;
   const fieldValue = get(formikProps, `values.${name}`) as string;
   const fieldError = getFieldError(name || "", formikProps);

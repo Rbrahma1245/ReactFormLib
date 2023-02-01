@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { FieldProps } from "../Types";
-import "./styles.css";
+import { FormikFieldProps } from "../Types";
+import "./styles.scss";
+// import "../Styles/Common.scss";
 import { CountryCodeFormat, COUNTRY_LIST } from "../Constants/CountryList";
 import { get } from "lodash";
 import { getFieldError } from "../../Utils";
 
 export interface PhoneFieldProps {
   header?: string;
+  helperText?: string;
   name?: string;
   countryCodeLabel?: string;
   phoneLabel?: string;
@@ -15,7 +17,7 @@ export interface PhoneFieldProps {
   renderOption?: (country: CountryCodeFormat, index?: number) => JSX.Element;
 }
 
-export interface PhoneFieldsProps extends FieldProps {
+export interface PhoneFieldsProps extends FormikFieldProps {
   fieldProps?: PhoneFieldProps;
 }
 
@@ -78,14 +80,15 @@ const PhoneField: React.FC<PhoneFieldsProps> = (props) => {
   return (
     <div>
       <label id={name}>{countryCodeLabel || "Country code"}</label>
-      <div>
-        <select id={name} value={code} onChange={codeChange}>
-          {emptyItem && <option value="">{emptyItemText}</option>}
-          {(COUNTRY_LIST as unknown as CountryCodeFormat[]).map(renderOption)}
-        </select>
-      </div>
-      <div>
+      <div className="phonefield-container">
+        <div>
+          <select id={name} value={code} onChange={codeChange}>
+            {emptyItem && <option value="">{emptyItemText}</option>}
+            {(COUNTRY_LIST as unknown as CountryCodeFormat[]).map(renderOption)}
+          </select>
+        </div>
         <input
+          className="phonefield-input"
           onBlur={handleBlur}
           autoComplete="nope"
           type="tel"
