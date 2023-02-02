@@ -1,9 +1,10 @@
+@import "../Styles/_variables.scss";
+@import "../Styles/_mixins.scss";
+@import "../Styles/_extends.scss";
+
 .fieldarray-header {
-    font-size: 18px;
-    color: rgb(77, 103, 208);
+    @include headerComponent;
 }
-
-
 
 .fieldarray-box{
     display: flex;
@@ -12,7 +13,6 @@
     margin-top:10px;  
     /* justify-content: space-between; */
 }
-
 
 .arrayRemoveIcon{
     background-color: rgb(199, 41, 41);
@@ -27,11 +27,15 @@
       width: 100px;
     cursor: pointer;
     box-shadow: 2px 2px 5px grey;
+
+    :hover{
+        background-color: rgb(143, 21, 21);
+    }
 }
 
-.arrayRemoveIcon:hover{
-    background-color: rgb(143, 21, 21);
-}
+// .arrayRemoveIcon:hover{
+//     background-color: rgb(143, 21, 21);
+// }
 
 .arrayAddIcon{
     background-color: #3ebe42; 
@@ -45,11 +49,15 @@
     width: 150px;   
     cursor: pointer;
     box-shadow: 2px 2px 5px grey;
+
+    :hover{
+        background-color: #2da831;   
+    }
 }
 
-.arrayAddIcon:hover{
-    background-color: #2da831;   
-}
+// .arrayAddIcon:hover{
+//     background-color: #2da831;   
+// }
 
 
 

@@ -1,6 +1,6 @@
 import { get } from "lodash";
 import React from "react";
-import "./styles.css";
+import "./styles.scss";
 import clsx from "clsx";
 import { FormikFieldProps } from "../Types";
 import { getFieldError } from "../../Utils";
@@ -28,10 +28,11 @@ const TextField: React.FC<TextFieldsProps> = (props) => {
   return (
     <div className="text-field">
       {header && <label className="text-header">{header}</label>}
-      <div className={clsx()}>
+      <div className="text-field-box">
         <input
           className={clsx(width == "full" ? "full" : undefined)}
           type="text"
+          placeholder={`${header}`}
           name={name}
           value={fieldValue}
           onBlur={formikProps.handleBlur}

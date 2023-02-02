@@ -9,7 +9,7 @@ import PhoneField, { PhoneFieldProps } from "./components/PhoneField";
 // import ArrayField, { FieldArrayProps } from "./components/FieldArray";
 
 const fieldProps: TextFieldProps = {
-  header: "Label text",
+  header: "Enter your Name",
   name: "fieldName",
   helperText: "Enter your text",
   width: "full",
@@ -32,7 +32,7 @@ const confirmPassword: PasswordFieldProps = {
 };
 
 const phoneProps: PhoneFieldProps = {
-  header: "Label phone ",
+  header: "phone No. ",
   name: "phoneno",
   helperText: "Enter your phone no.",
   // itemType: "string",

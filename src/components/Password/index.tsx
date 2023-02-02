@@ -27,11 +27,12 @@ const Password: React.FC<PasswordFieldsProps> = (props) => {
   return (
     <div className="password-field">
       {header && <label className="password-header">{header}</label>}
-      <div>
+      <div className="password-box">
         <input
           className={clsx(width == "full" ? "full" : undefined)}
           type="password"
           autoComplete="off"
+          placeholder={`${header}`}
           name={name}
           value={fieldValue}
           onBlur={formikProps.handleBlur}

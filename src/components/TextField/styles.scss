@@ -2,22 +2,22 @@
 @import "../Styles/_mixins.scss";
 @import "../Styles/_extends.scss";
 
-.phonefield-header{
-    @include headerComponent;   
+.text-header {
+    @include headerComponent;
 }
-.phonefield-error{
+.text-error  {
     @include errorComponent;
 }
-input[type=tel] {
+.text-helper {
+    @include helperComponent;   
+}
+input[type=text] {
     @include inputTextFieldComponent;
 }
 
-.phonefield-container{
+
+.text-field-box{
     display: flex;
-    width: 100%; 
 }
-.phonefield-select{
-    width: 130px;
-    height: 45px;
-}
+
 

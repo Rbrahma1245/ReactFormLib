@@ -78,20 +78,28 @@ const PhoneField: React.FC<PhoneFieldsProps> = (props) => {
   console.log(formikProps);
 
   return (
-    <div>
-      <label id={name}>{countryCodeLabel || "Country code"}</label>
+    <div className="phone-field">
+      <label className="phonefield-header" id={name}>
+        {countryCodeLabel || "Country code"}
+      </label>
       <div className="phonefield-container">
         <div>
-          <select id={name} value={code} onChange={codeChange}>
+          <select
+            className="phonefield-select"
+            id={name}
+            value={code}
+            onChange={codeChange}
+          >
             {emptyItem && <option value="">{emptyItemText}</option>}
             {(COUNTRY_LIST as unknown as CountryCodeFormat[]).map(renderOption)}
           </select>
         </div>
         <input
+          type="tel"
           className="phonefield-input"
+          placeholder={`${header}`}
           onBlur={handleBlur}
           autoComplete="nope"
-          type="tel"
           value={value.split("-")[1] || ""}
           onChange={onChange}
         />

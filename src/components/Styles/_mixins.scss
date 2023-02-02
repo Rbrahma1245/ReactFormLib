@@ -1,0 +1,24 @@
+@mixin headerComponent(){
+    color: $headerTextColor;
+    font-size: $headerFontSize; 
+}
+
+@mixin errorComponent(){
+    color: $errorTextColor;
+    font-size: $errorFontSize; 
+}
+
+@mixin helperComponent(){
+    color: $helperTextColor;
+    font-size: $helperFontSize; 
+    padding: 2px 4px;
+}
+
+@mixin inputTextFieldComponent(){
+    width: 100%;
+    padding: 2px 8px;
+    height: 40px;
+    border-radius: 4px;
+    font-size: $inputFieldFontSize;
+    border: 1px solid black;
+}
