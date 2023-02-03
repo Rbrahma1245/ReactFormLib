@@ -4,6 +4,7 @@ import "./styles.scss";
 import clsx from "clsx";
 import { FormikFieldProps } from "../Types";
 import { getFieldError } from "../../Utils";
+import { FormikValues } from "formik";
 
 export interface PasswordFieldProps {
   header: string;
@@ -13,11 +14,14 @@ export interface PasswordFieldProps {
   width?: string;
 }
 interface PasswordFieldsProps extends FormikFieldProps {
-  fieldProps: PasswordFieldProps;
+  fieldProps?: PasswordFieldProps;
 }
 
 const Password: React.FC<PasswordFieldsProps> = (props) => {
-  const { fieldProps = {} as PasswordFieldProps, formikProps } = props;
+  const {
+    fieldProps = {} as PasswordFieldProps,
+    formikProps = {} as FormikValues,
+  } = props;
 
   const { header, helperText, name, width } = fieldProps;
   const fieldValue = get(formikProps, `values.${name}`) as string;

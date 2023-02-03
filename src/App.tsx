@@ -1,58 +1,13 @@
 import React from "react";
-import { Formik, FormikProps } from "formik";
 import "./App.css";
 import * as yup from "yup";
-import { get, isArray, isFunction, map, uniqueId } from "lodash";
-import TextField, { TextFieldProps } from "./components/TextField";
-import Password, { PasswordFieldProps } from "./components/Password";
-import PhoneField, { PhoneFieldProps } from "./components/PhoneField";
-import clsx from "clsx";
 import ReactForm from "./components/ReactForm";
-
-// import ArrayField, { FieldArrayProps } from "./components/FieldArray";
-
-const fieldProps: TextFieldProps = {
-  header: "Enter your Name",
-  name: "fieldName",
-  helperText: "Enter your text",
-  width: "full",
-  // itemType: "string",
-};
-
-const passwordProps: PasswordFieldProps = {
-  header: "Password",
-  name: "Password",
-  helperText: "Enter your password",
-  width: "full",
-  // itemType: "string",
-};
-
-const confirmPassword: PasswordFieldProps = {
-  header: "Confirm password",
-  name: "confirmPass",
-  helperText: "Confirm your password",
-  width: "full",
-};
-
-const phoneProps: PhoneFieldProps = {
-  header: "phone No. ",
-  name: "phoneno",
-  helperText: "Enter your phone no.",
-  // itemType: "string",
-};
-
-// const fieldPropss: FieldArrayProps = {
-//   header: "Label",
-//   name: "fieldName",
-//   helperText: "Enter your text",
-//   itemType: "string",
-// };
 
 const App = () => {
   // const phoneRegExp =
   //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const FormSchema = yup.object({
-    fieldName: yup.string().required("Text Required"),
+    name: yup.string().required("Text Required"),
     Password: yup
       .string()
       .min(5, "Password must be 5 characters long")
@@ -68,13 +23,6 @@ const App = () => {
     phoneno: yup.string().required("Phone number is required"),
   });
 
-  // const arrayfieldProps = [
-  //   { fieldName: "apple", type: "fruits" },
-  //   { fieldName: "mango", type: "fruits" },
-  //   { fieldName: "orange", type: "fruits" },
-  //   { fieldName: "kiwi", type: "fruits" },
-  // ];
-
   // const arrayfieldProps = {
   //   arrayfieldProps: [
   //     { fieldName: "apple", type: "fruits" },
@@ -87,47 +35,47 @@ const App = () => {
   const myConfig = [
     {
       type: "text",
-      valueKey: "fieldName",
-      fieldProps: {
-        label: "Sample Text Field 1",
-        header: "Enter your Name 1",
-        name: "fieldName",
-        helperText: "Enter your text 1",
-        fullWidth: true,
-      },
-    },
-    {
-      type: "text",
       valueKey: "name",
       fieldProps: {
-        label: "Sample Text Field 2",
-        header: "Enter your Name 2",
+        header: "Enter your Name",
         name: "name",
-        helperText: "Enter your text 2",
+        helperText: "Enter your text",
+        width: "full",
         fullWidth: true,
+        // itemType: "string",
       },
     },
+
     {
       type: "password",
       valueKey: "Password",
       fieldProps: {
-        label: "Sample Text Field 3",
-        header: "Enter your Name 3",
+        header: "Password",
         name: "Password",
-        helperText: "Enter your text 3",
-        fullWidth: true,
+        helperText: "Enter your password",
+        // width: "full",
+      },
+    },
+
+    {
+      type: "password",
+      valueKey: "confirmPass",
+      fieldProps: {
+        header: "Confirm password",
+        name: "confirmPass",
+        helperText: "Confirm your password",
+        // width: "full",
       },
     },
     {
       type: "phone",
-      valueKey: "array",
+      valueKey: "phoneno",
 
       fieldProps: {
-        label: "Sample Field Array 4",
-        header: "Enter your Name 4",
-        name: "phone",
-        helperText: "Enter your text 4",
-        fullWidth: true,
+        header: "phone No. ",
+        name: "phoneno",
+        helperText: "Enter your phone no.",
+        // itemType: "string",
       },
     },
   ];
@@ -139,38 +87,11 @@ const App = () => {
       <ReactForm
         config={myConfig}
         initialValues={myInitialValues}
+        validationSchema={FormSchema}
         onSubmit={(values: object) => {
           console.log(values);
         }}
       />
-      {/* <Formik
-        initialValues={{
-          fieldName: "",
-        }}
-        validationSchema={FormSchema}
-        onSubmit={(data) => {
-          console.log(data);
-        }}
-      >
-        {(formikProp) => {
-          return (
-            <form className="form" onSubmit={formikProp.handleSubmit}>
-              <TextField formikProps={formikProp} fieldProps={fieldProps} />
-
-              <Password formikProps={formikProp} fieldProps={passwordProps} />
-              <Password formikProps={formikProp} fieldProps={confirmPassword} />
-
-              <PhoneField formikProps={formikProp} fieldProps={phoneProps} />
-
-              {/* <ArrayField formikProps={formikProp} fieldProps={arrayfieldProps} /> */}
-
-      {/* <button className="btn-submit" type="submit">
-                Submit
-              </button>
-            </form>
-          );
-        }}
-      </Formik> */}
     </div>
   );
 };

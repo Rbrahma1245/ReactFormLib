@@ -4,6 +4,7 @@ import "./styles.scss";
 import clsx from "clsx";
 import { FormikFieldProps } from "../Types";
 import { getFieldError } from "../../Utils";
+import { FormikValues } from "formik";
 
 export interface TextFieldProps {
   header: string;
@@ -14,19 +15,19 @@ export interface TextFieldProps {
 }
 
 interface TextFieldsProps extends FormikFieldProps {
-  fieldProps: TextFieldProps;
+  fieldProps?: TextFieldProps;
 }
 
 const TextField: React.FC<TextFieldsProps> = (props) => {
-  console.log(props);
-  const { fieldProps = {} as TextFieldProps, formikProps } = props;
+  const {
+    fieldProps = {} as TextFieldProps,
+    formikProps = {} as FormikValues,
+  } = props;
 
   const { header, helperText, name, width } = fieldProps;
   const fieldValue = get(formikProps, `values.${name}`) as string;
   const fieldError = getFieldError(name || "", formikProps);
   const errorFlag = !!fieldError;
-
-  console.log(formikProps);
 
   return (
     <div className="text-field">

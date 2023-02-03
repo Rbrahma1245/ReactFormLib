@@ -1,7 +1,7 @@
 import React from "react";
 import { get } from "lodash";
 import "./styles.scss";
-import { FieldArray, FieldArrayRenderProps } from "formik";
+import { FieldArray, FieldArrayRenderProps, FormikValues } from "formik";
 import { FormikFieldProps } from "../Types";
 import { getComponentConfig } from "../../Utils";
 
@@ -19,12 +19,15 @@ export interface FieldArrayProps {
 }
 
 interface FieldsArrayprops extends FormikFieldProps {
-  fieldProps: FieldArrayProps;
+  fieldProps?: FieldArrayProps;
 }
 
 const ArrayField: React.FC<FieldsArrayprops> = (props) => {
-  const { fieldProps = {} as FieldArrayProps, formikProps } = props;
-  console.log(fieldProps);
+  const {
+    fieldProps = {} as FieldArrayProps,
+    formikProps = {} as FormikValues,
+  } = props;
+  // console.log(fieldProps);
 
   const {
     addButtonText = "Add",

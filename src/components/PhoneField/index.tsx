@@ -5,6 +5,7 @@ import "./styles.scss";
 import { CountryCodeFormat, COUNTRY_LIST } from "../Constants/CountryList";
 import { get } from "lodash";
 import { getFieldError } from "../../Utils";
+import { FormikValues } from "formik";
 
 export interface PhoneFieldProps {
   header?: string;
@@ -22,7 +23,10 @@ export interface PhoneFieldsProps extends FormikFieldProps {
 }
 
 const PhoneField: React.FC<PhoneFieldsProps> = (props) => {
-  const { fieldProps = {} as PhoneFieldProps, formikProps } = props;
+  const {
+    fieldProps = {} as PhoneFieldProps,
+    formikProps = {} as FormikValues,
+  } = props;
   const [code, setCode] = useState<string>("");
 
   const handleRenderOption = (country: CountryCodeFormat, index: number) => {
@@ -75,7 +79,7 @@ const PhoneField: React.FC<PhoneFieldsProps> = (props) => {
     if (formikProps && formikProps.handleBlur) formikProps?.handleBlur(e);
   };
 
-  console.log(formikProps);
+  // console.log(formikProps);
 
   return (
     <div className="phone-field">
@@ -98,7 +102,9 @@ const PhoneField: React.FC<PhoneFieldsProps> = (props) => {
           type="tel"
           className="phonefield-input"
           placeholder={`${header}`}
-          onBlur={handleBlur}
+          name={name}
+          // onBlur={handleBlur}
+          onBlur={formikProps.handleBlur}
           autoComplete="nope"
           value={value.split("-")[1] || ""}
           onChange={onChange}

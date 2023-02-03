@@ -1,31 +1,14 @@
+import * as React from "react";
 import clsx from "clsx";
+import "./styles.scss";
 import { FormikProps } from "formik";
 import { get, isArray, isFunction, map, uniqueId } from "lodash";
-import * as React from "react";
-import TextField, { TextFieldProps } from "../TextField";
-
 import { getConditionalProps, TFieldConditions } from "../ConditionalOperation";
-import PasswordField, { PasswordFieldProps } from "../Password";
+import TextField from "../TextField";
+import PasswordField from "../Password";
 import PhoneField from "../PhoneField";
-import FieldArray, { FieldArrayProps } from "../FieldArray";
-
+import FieldArray from "../FieldArray";
 const { useEffect, useState } = React;
-
-const fieldProps: TextFieldProps = {
-  header: "Enter your Name",
-  name: "fieldName",
-  helperText: "Enter your text",
-  width: "full",
-  // itemType: "string",
-};
-
-const passwordProps: PasswordFieldProps = {
-  header: "Password",
-  name: "Password",
-  helperText: "Enter your password",
-  width: "full",
-  // itemType: "string",
-};
 
 export interface ReadOnlyProps {
   renderer: (props: IFieldProps) => React.ReactNode;
@@ -143,10 +126,11 @@ export const BuildFormRow: React.FC<FormRowProps> = (props) => {
       isReadOnly: false,
     },
   } = props;
-  const columnItems = get(schema, "columns") as Array<FormConfig>;
+  //   console.log(schema);
+  const columnItems = get(schema, "columns");
   const rowSettings = {
     ...settings,
-    ...get(schema, "settings"),
+    // ...get(schema, "settings"),
   } as RowSettingsProps;
   const colItems = isArray(schema)
     ? schema
@@ -157,7 +141,7 @@ export const BuildFormRow: React.FC<FormRowProps> = (props) => {
   const rowStyle = { marginBottom: rowSettings.verticalSpacing || 10 };
   return (
     <div className={`classes.row`} style={rowStyle}>
-      {map(colItems, (item: FormConfig, index) => {
+      {map(colItems, (item: FormConfig, index: number) => {
         const componentConfig = ComponentMapConfig[item.type];
         const horizontalSpacing =
           index === colItems.length - 1
@@ -175,20 +159,22 @@ export const BuildFormRow: React.FC<FormRowProps> = (props) => {
         };
         const Component = componentConfig.component;
 
+        // console.log(Component);
+
         if (conditionalProps.hidden === true)
           return <div key={`${rowId}_field_${index}`} />;
         return (
           <div
             key={`${rowId}_field_${index}`}
             className={clsx(item.classNames, `classes.column`)}
-            style={{
-              flex: item.flex || 1,
-              marginRight: horizontalSpacing,
-              paddingLeft: rowSettings.columnHorizontalPadding,
-              paddingRight: rowSettings.columnHorizontalPadding,
-              maxWidth: "100%",
-              ...item.styles,
-            }}
+            // style={{
+            //   flex: item.flex || 1,
+            //   marginRight: horizontalSpacing,
+            //   paddingLeft: rowSettings.columnHorizontalPadding,
+            //   paddingRight: rowSettings.columnHorizontalPadding,
+            //   maxWidth: "100%",
+            //   ...item.styles,
+            // }}
           >
             {settings.isReadOnly &&
             item.readOnlyProps &&
@@ -279,20 +265,23 @@ export const MLFormAction: React.FC<
       ) : (
         <>
           <button
+            className="submit-btn"
             type="submit"
             disabled={formikProps.isSubmitting}
             color="primary"
           >
             {submitButtonText}
           </button>
-          {/* {formikProps.isSubmitting && (
-            <CircularProgress
-              size={24}
-              color="secondary"
-              className={classes.submitLoader}
-              {...loaderProps}
-            />
-          )} */}
+          {formikProps.isSubmitting && (
+            // <CircularProgress
+            //   size={24}
+            //   color="secondary"
+            //   className={classes.submitLoader}
+            //   {...loaderProps}
+            // />
+
+            <div className="loader"></div>
+          )}
         </>
       )}
     </div>
@@ -306,13 +295,19 @@ export const MLFormBuilder: React.FC<BuilderProps> = (props) => {
     isInProgress = false,
     actionConfig = {} as IFormActionProps,
   } = props;
+
   useEffect(() => {
     if (isInProgress === false) formikProps.setSubmitting(false);
   }, [isInProgress]);
 
+  useEffect(() => {
+    if (formikProps.isSubmitting === true) formikProps.setSubmitting(false);
+  }, [formikProps.isSubmitting]);
+
   return (
     <form onSubmit={formikProps.handleSubmit}>
       <MLFormContent {...props} />
+
       {actionConfig.displayActions !== false && (
         <MLFormAction
           formId={props.formId}

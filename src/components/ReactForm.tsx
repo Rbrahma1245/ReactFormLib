@@ -14,7 +14,7 @@ export interface IReactFormProps extends FormikValues {
 }
 
 export const ReactForm: React.FC<IReactFormProps> = (props) => {
-  console.log(props);
+  //   console.log(props);
   const {
     config,
     formId = "1",
@@ -34,7 +34,7 @@ export const ReactForm: React.FC<IReactFormProps> = (props) => {
         {...formikProps}
       >
         {(formikProp) => {
-          console.log(formikProp);
+          //   console.log(formikProp);
           return (
             <MLFormBuilder
               schema={config}
