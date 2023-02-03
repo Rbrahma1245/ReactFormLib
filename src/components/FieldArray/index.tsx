@@ -24,6 +24,7 @@ interface FieldsArrayprops extends FormikFieldProps {
 
 const ArrayField: React.FC<FieldsArrayprops> = (props) => {
   const { fieldProps = {} as FieldArrayProps, formikProps } = props;
+  console.log(fieldProps);
 
   const {
     addButtonText = "Add",

@@ -1,10 +1,13 @@
 import React from "react";
-import { Formik } from "formik";
+import { Formik, FormikProps } from "formik";
 import "./App.css";
 import * as yup from "yup";
+import { get, isArray, isFunction, map, uniqueId } from "lodash";
 import TextField, { TextFieldProps } from "./components/TextField";
 import Password, { PasswordFieldProps } from "./components/Password";
 import PhoneField, { PhoneFieldProps } from "./components/PhoneField";
+import clsx from "clsx";
+import ReactForm from "./components/ReactForm";
 
 // import ArrayField, { FieldArrayProps } from "./components/FieldArray";
 
@@ -81,9 +84,66 @@ const App = () => {
   //   ],
   // };
 
+  const myConfig = [
+    {
+      type: "text",
+      valueKey: "fieldName",
+      fieldProps: {
+        label: "Sample Text Field 1",
+        header: "Enter your Name 1",
+        name: "fieldName",
+        helperText: "Enter your text 1",
+        fullWidth: true,
+      },
+    },
+    {
+      type: "text",
+      valueKey: "name",
+      fieldProps: {
+        label: "Sample Text Field 2",
+        header: "Enter your Name 2",
+        name: "name",
+        helperText: "Enter your text 2",
+        fullWidth: true,
+      },
+    },
+    {
+      type: "password",
+      valueKey: "Password",
+      fieldProps: {
+        label: "Sample Text Field 3",
+        header: "Enter your Name 3",
+        name: "Password",
+        helperText: "Enter your text 3",
+        fullWidth: true,
+      },
+    },
+    {
+      type: "phone",
+      valueKey: "array",
+
+      fieldProps: {
+        label: "Sample Field Array 4",
+        header: "Enter your Name 4",
+        name: "phone",
+        helperText: "Enter your text 4",
+        fullWidth: true,
+      },
+    },
+  ];
+
+  const myInitialValues = {};
+
   return (
     <div>
-      <Formik
+      <ReactForm
+        config={myConfig}
+        initialValues={myInitialValues}
+        onSubmit={(values: object) => {
+          console.log(values);
+        }}
+      />
+      {/* <Formik
         initialValues={{
           fieldName: "",
         }}
@@ -104,13 +164,13 @@ const App = () => {
 
               {/* <ArrayField formikProps={formikProp} fieldProps={arrayfieldProps} /> */}
 
-              <button className="btn-submit" type="submit">
+      {/* <button className="btn-submit" type="submit">
                 Submit
               </button>
             </form>
           );
         }}
-      </Formik>
+      </Formik> */}
     </div>
   );
 };

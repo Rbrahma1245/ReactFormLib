@@ -18,12 +18,15 @@ interface TextFieldsProps extends FormikFieldProps {
 }
 
 const TextField: React.FC<TextFieldsProps> = (props) => {
+  console.log(props);
   const { fieldProps = {} as TextFieldProps, formikProps } = props;
 
   const { header, helperText, name, width } = fieldProps;
   const fieldValue = get(formikProps, `values.${name}`) as string;
   const fieldError = getFieldError(name || "", formikProps);
   const errorFlag = !!fieldError;
+
+  console.log(formikProps);
 
   return (
     <div className="text-field">
