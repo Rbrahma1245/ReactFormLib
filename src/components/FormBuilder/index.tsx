@@ -11,7 +11,7 @@ import FieldArray from "../FieldArray";
 const { useEffect, useState } = React;
 
 export interface ReadOnlyProps {
-  renderer: (props: IFieldProps) => React.ReactNode;
+  renderer: (props: FieldProps) => React.ReactNode;
 }
 export interface FormConfig {
   type: string;
@@ -48,25 +48,23 @@ export interface FormRowProps<T = any> {
 }
 
 type submitButtonLayout = "right" | "center" | "fullWidth";
-export interface IFormActionProps {
+export interface FormActionProps {
   submitButtonText?: string;
-  //   submitButtonProps?: ButtonProps;
   submitButtonLayout?: submitButtonLayout;
   actionContent?: JSX.Element;
   containerClassNames?: string | string[];
   displayActions?: boolean;
-  //   loaderProps?: CircularProgressProps;
 }
 export interface BuilderProps<T = any> {
   schema: Array<RowSchema>;
   formId: string;
   formikProps?: FormikProps<T>;
-  actionConfig?: IFormActionProps;
+  actionConfig?: FormActionProps;
   settings?: BuilderSettingsProps;
   isInProgress?: boolean;
 }
 
-export interface IFieldProps<T = any> {
+export interface FieldProps<T = any> {
   formikProps?: FormikProps<T>;
   fieldConfig?: FormConfig;
   isReadOnly?: boolean;
@@ -126,7 +124,6 @@ export const BuildFormRow: React.FC<FormRowProps> = (props) => {
       isReadOnly: false,
     },
   } = props;
-  //   console.log(schema);
   const columnItems = get(schema, "columns");
   const rowSettings = {
     ...settings,
@@ -158,8 +155,6 @@ export const BuildFormRow: React.FC<FormRowProps> = (props) => {
           ...conditionalProps.finalProps,
         };
         const Component = componentConfig.component;
-
-        // console.log(Component);
 
         if (conditionalProps.hidden === true)
           return <div key={`${rowId}_field_${index}`} />;
@@ -234,7 +229,7 @@ export const MLFormContent: React.FC<BuilderProps> = (props) => {
 };
 
 export const MLFormAction: React.FC<
-  IFormActionProps & Pick<BuilderProps, "formId" | "formikProps">
+  FormActionProps & Pick<BuilderProps, "formId" | "formikProps">
 > = (props) => {
   const {
     formId,
@@ -293,7 +288,7 @@ export const MLFormBuilder: React.FC<BuilderProps> = (props) => {
   const {
     formikProps = {} as FormikProps<any>,
     isInProgress = false,
-    actionConfig = {} as IFormActionProps,
+    actionConfig = {} as FormActionProps,
   } = props;
 
   useEffect(() => {
