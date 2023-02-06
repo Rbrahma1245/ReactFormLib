@@ -1,0 +1,23 @@
+@import "../Styles/_variables.scss";
+@import "../Styles/_mixins.scss";
+@import "../Styles/_extends.scss";
+
+.checkbox-field {
+    @include componentField;
+}
+
+.checkbox-header {
+    @include headerComponent;
+}
+.checkbox-error {
+    @include errorComponent;
+}
+
+.helper-text {
+    @include helperComponent;   
+}
+
+.column{
+    @include column;
+}
+

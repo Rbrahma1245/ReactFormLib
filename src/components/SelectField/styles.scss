@@ -1,0 +1,26 @@
+@import "../Styles/_variables.scss";
+@import "../Styles/_mixins.scss";
+@import "../Styles/_extends.scss";
+
+
+
+.select-field {
+    @include componentField;
+}
+
+.select-field-header {
+    @include headerComponent;
+}
+.helper-text {
+    @include helperComponent;    
+}
+
+.select-field-error {
+    @include errorComponent;
+}
+
+.select-option{
+    width: 200px;
+    height: 30px;
+}
+

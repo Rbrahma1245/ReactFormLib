@@ -1,0 +1,22 @@
+@import "../Styles/_variables.scss";
+@import "../Styles/_mixins.scss";
+@import "../Styles/_extends.scss";
+
+
+.file-input-field {
+    @include componentField;
+}
+
+.file-input-header {
+    @include headerComponent;
+}
+
+
+.helper-text {
+    @include helperComponent;    
+
+}
+
+.file-input-error {
+    @include errorComponent;   
+}

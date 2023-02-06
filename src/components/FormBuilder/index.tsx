@@ -8,6 +8,11 @@ import TextField from "../TextField";
 import PasswordField from "../Password";
 import PhoneField from "../PhoneField";
 import FieldArray from "../FieldArray";
+import CheckBox from "../CheckBox";
+import Radio from "../Radio";
+import SelectField from "../SelectField";
+import Switch from "../Switch";
+import FileInput from "../FileInput";
 const { useEffect, useState } = React;
 
 export interface ReadOnlyProps {
@@ -111,6 +116,11 @@ attachField("text", <TextField />, { type: "text" });
 attachField("password", <PasswordField />, { type: "password" });
 attachField("array", <FieldArray />);
 attachField("phone", <PhoneField />);
+attachField("checkbox", <CheckBox />);
+attachField("radio", <Radio />);
+attachField("select", <SelectField />);
+attachField("switch", <Switch />);
+attachField("file", <FileInput />);
 
 export const BuildFormRow: React.FC<FormRowProps> = (props) => {
   const {
