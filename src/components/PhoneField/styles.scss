@@ -8,6 +8,10 @@
 .phonefield-error{
     @include errorComponent;
 }
+
+.phonefield-helper{
+    @include helperComponent;
+}
 input[type=tel] {
     @include inputTextFieldComponent;
 }

@@ -20,17 +20,8 @@ const App = () => {
       .string()
       .oneOf([yup.ref("Password"), null], ' "Password" did not match ')
       .required("Required"),
-    phoneno: yup.string().required("Phone number is required"),
+    phoneNo: yup.string().required("Phone number is required"),
   });
-
-  // const arrayfieldProps = {
-  //   arrayfieldProps: [
-  //     { fieldName: "apple", type: "fruits" },
-  //     { fieldName: "mango", type: "fruits" },
-  //     { fieldName: "orange", type: "fruits" },
-  //     { fieldName: "kiwi", type: "fruits" },
-  //   ],
-  // };
 
   const myConfig = [
     {
@@ -38,11 +29,9 @@ const App = () => {
       valueKey: "name",
       fieldProps: {
         header: "Enter your Name",
-        name: "name",
         helperText: "Enter your text",
         width: "full",
         fullWidth: true,
-        // itemType: "string",
       },
     },
 
@@ -51,7 +40,6 @@ const App = () => {
       valueKey: "Password",
       fieldProps: {
         header: "Password",
-        name: "Password",
         helperText: "Enter your password",
         // width: "full",
       },
@@ -62,18 +50,15 @@ const App = () => {
       valueKey: "confirmPass",
       fieldProps: {
         header: "Confirm password",
-        name: "confirmPass",
         helperText: "Confirm your password",
         // width: "full",
       },
     },
     {
       type: "phone",
-      valueKey: "phoneno",
-
+      valueKey: "phoneNo",
       fieldProps: {
         header: "phone No. ",
-        name: "phoneno",
         helperText: "Enter your phone no.",
         // itemType: "string",
       },

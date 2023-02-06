@@ -41,6 +41,7 @@ const PhoneField: React.FC<PhoneFieldsProps> = (props) => {
   const {
     header,
     name,
+    helperText,
     emptyItem,
     emptyItemText,
     countryCodeLabel,
@@ -110,7 +111,17 @@ const PhoneField: React.FC<PhoneFieldsProps> = (props) => {
           onChange={onChange}
         />
       </div>
-      {error && <label className="phonefield-error error">{newError}</label>}
+      {/* {error && <label className="phonefield-error error">{newError}</label>} */}
+
+      {(error || helperText) && (
+        <div className="label-error">
+          {error ? (
+            <span className="phonefield-error error">{newError}</span>
+          ) : (
+            <span className="phonefield-helper helpertext">{helperText} </span>
+          )}
+        </div>
+      )}
     </div>
   );
 };

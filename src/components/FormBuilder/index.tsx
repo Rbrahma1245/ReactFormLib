@@ -154,6 +154,7 @@ export const BuildFormRow: React.FC<FormRowProps> = (props) => {
           ...item.fieldProps,
           ...conditionalProps.finalProps,
         };
+        // console.log(fieldProps);
         const Component = componentConfig.component;
 
         if (conditionalProps.hidden === true)
@@ -246,11 +247,7 @@ export const MLFormAction: React.FC<
   const layoutClassName = `action-${submitButtonLayout}`;
   return (
     <div
-      className={clsx(
-        // classes.actionContainer,
-        layoutClassName,
-        containerClassNames
-      )}
+      className={clsx("actionContainer", layoutClassName, containerClassNames)}
     >
       {props.actionContent ? (
         React.cloneElement(props.actionContent || <div />, {
@@ -259,24 +256,19 @@ export const MLFormAction: React.FC<
         })
       ) : (
         <>
-          <button
-            className="submit-btn"
-            type="submit"
-            disabled={formikProps.isSubmitting}
-            color="primary"
-          >
-            {submitButtonText}
-          </button>
-          {formikProps.isSubmitting && (
-            // <CircularProgress
-            //   size={24}
-            //   color="secondary"
-            //   className={classes.submitLoader}
-            //   {...loaderProps}
-            // />
-
-            <div className="loader"></div>
-          )}
+          <div className="submit-loader-container">
+            {formikProps.isSubmitting ? (
+              <div className="loader"></div>
+            ) : (
+              <button
+                className="submit-btn"
+                type="submit"
+                disabled={formikProps.isSubmitting}
+              >
+                {submitButtonText}
+              </button>
+            )}
+          </div>
         </>
       )}
     </div>
@@ -292,11 +284,10 @@ export const MLFormBuilder: React.FC<BuilderProps> = (props) => {
   } = props;
 
   useEffect(() => {
-    if (isInProgress === false) formikProps.setSubmitting(false);
-  }, [isInProgress]);
-
-  useEffect(() => {
-    if (formikProps.isSubmitting === true) formikProps.setSubmitting(false);
+    if (isInProgress === false)
+      setTimeout(() => {
+        formikProps.setSubmitting(false);
+      }, 6000);
   }, [formikProps.isSubmitting]);
 
   return (

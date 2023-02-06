@@ -3,14 +3,14 @@ import { Formik, FormikValues } from "formik";
 import MLFormBuilder from "./FormBuilder";
 export * from "./FormBuilder";
 
-export interface IReactFormProps extends FormikValues {
+export interface ReactFormProps extends FormikValues {
   //   config: Array<RowSchema>;
   formId?: string;
   isInProgress?: boolean;
   isReadOnly?: boolean;
 }
 
-export const ReactForm: React.FC<IReactFormProps> = (props) => {
+export const ReactForm: React.FC<ReactFormProps> = (props) => {
   const {
     config,
     formId = "1",
