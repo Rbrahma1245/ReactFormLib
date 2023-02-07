@@ -19,7 +19,6 @@ interface TextFieldsProps extends FormikFieldProps {
 }
 
 const TextField: React.FC<TextFieldsProps> = (props) => {
-  // console.log(props);
   const {
     fieldProps = {} as TextFieldProps,
     formikProps = {} as FormikValues,

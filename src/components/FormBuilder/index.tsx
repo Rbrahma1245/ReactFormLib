@@ -144,7 +144,7 @@ export const BuildFormRow: React.FC<FormRowProps> = (props) => {
     : isArray(columnItems)
     ? columnItems
     : [schema];
-  //   const classes = useFormStyles();
+
   const rowStyle = { marginBottom: rowSettings.verticalSpacing || 10 };
   return (
     <div className={`classes.row`} style={rowStyle}>
@@ -164,7 +164,7 @@ export const BuildFormRow: React.FC<FormRowProps> = (props) => {
           ...item.fieldProps,
           ...conditionalProps.finalProps,
         };
-        // console.log(fieldProps);
+
         const Component = componentConfig.component;
 
         if (conditionalProps.hidden === true)
@@ -286,7 +286,7 @@ export const MLFormAction: React.FC<
 };
 
 export const MLFormBuilder: React.FC<BuilderProps> = (props) => {
-  console.log(props);
+  // console.log(props);
   const {
     formikProps = {} as FormikProps<any>,
     isInProgress = false,

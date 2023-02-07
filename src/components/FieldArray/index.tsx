@@ -2,23 +2,24 @@ import React from "react";
 import { get } from "lodash";
 import "./styles.scss";
 import { FieldArray, FieldArrayRenderProps, FormikValues } from "formik";
-import { FormikFieldProps } from "../Types";
-import { getComponentConfig } from "../../Utils";
+import { FieldProps, getComponentConfig } from "../FormBuilder/index";
 
 export interface FieldArrayProps {
   name: string;
   header: string;
-  helperText: string;
-  itemType?: string;
+  itemType: string;
+  helperText?: string;
   id?: string;
   addButtonText?: string;
   addButton?: JSX.Element;
   removeButton?: JSX.Element;
   onAddButtonClick?: () => Promise<any | undefined>;
   onRemoveButtonClick?: (index: number) => Promise<boolean>;
+  arrayItemFieldProps?: object;
+  defaultItemValue?: any;
 }
 
-interface FieldsArrayprops extends FormikFieldProps {
+interface FieldsArrayprops extends FieldProps {
   fieldProps?: FieldArrayProps;
 }
 
@@ -27,27 +28,27 @@ const ArrayField: React.FC<FieldsArrayprops> = (props) => {
     fieldProps = {} as FieldArrayProps,
     formikProps = {} as FormikValues,
   } = props;
-  // console.log(fieldProps);
 
   const {
     addButtonText = "Add",
     header,
-    // helperText,
     name,
     itemType,
     addButton,
     removeButton,
     onAddButtonClick,
     onRemoveButtonClick,
+    arrayItemFieldProps = {},
+    defaultItemValue = "",
   } = fieldProps;
 
-  const fieldValue = get(formikProps, `values.${name}`) || [];
+  const values = get(formikProps, `values.${name}`);
 
   const itemComponentConfig = getComponentConfig(itemType);
 
   const handleElementAdd = async (arrayHelpers: FieldArrayRenderProps) => {
     if (!onAddButtonClick) {
-      arrayHelpers.push(fieldValue);
+      arrayHelpers.push(defaultItemValue);
       return;
     }
     const res = await onAddButtonClick();
@@ -71,22 +72,25 @@ const ArrayField: React.FC<FieldsArrayprops> = (props) => {
   return (
     <div className="array-field">
       {header && <label className="fieldarray-header">{header}</label>}
-
       <FieldArray
         name={name}
         render={(arrayHelpers) => (
           <div>
-            {(fieldValue || []).map((value: any, index: number) => (
-              <div className="fieldarray-box" key={`${name}-${index}`}>
+            {(values || []).map((value: any, index: number) => (
+              <div
+                key={`${fieldProps.name}-${index}`}
+                className="fieldarray-box"
+              >
                 {React.cloneElement(itemComponentConfig.component, {
-                  name: name,
                   itemIndex: index,
                   arrayHelpers,
-                  fieldValue: value,
                   formikProps,
+                  fieldProps: {
+                    ...arrayItemFieldProps,
+                    name: `${name}[${index}]`,
+                  },
                   ...itemComponentConfig.props,
                 })}
-
                 {removeButton ? (
                   removeButton
                 ) : (

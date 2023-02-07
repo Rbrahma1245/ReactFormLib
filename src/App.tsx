@@ -84,38 +84,50 @@ const App = () => {
   };
 
   const myConfig = [
-    {
-      type: "checkbox",
-      fieldProps: CheckBoxFP,
-      valueKey: "books",
-    },
+    // {
+    //   type: "checkbox",
+    //   fieldProps: CheckBoxFP,
+    //   valueKey: "books",
+    // },
     {
       type: "radio",
       fieldProps: RadioFP,
       valueKey: "gender",
     },
-    {
-      type: "select",
-      fieldProps: SelectFP,
-      valueKey: "languages",
-    },
+    // {
+    //   type: "select",
+    //   fieldProps: SelectFP,
+    //   valueKey: "languages",
+    // },
 
-    {
-      type: "switch",
-      fieldProps: SwitchFP,
-      valueKey: "toggle",
-    },
+    // {
+    //   type: "switch",
+    //   fieldProps: SwitchFP,
+    //   valueKey: "toggle",
+    // },
 
-    {
-      type: "file",
-      fieldProps: FileInputFP,
-      valueKey: "files",
-    },
+    // {
+    //   type: "file",
+    //   fieldProps: FileInputFP,
+    //   valueKey: "files",
+    // },
     {
       type: "text",
       valueKey: "name",
       fieldProps: {
-        header: "header",
+        header: "Enter your name",
+        helperText: "Name",
+      },
+    },
+    {
+      type: "array",
+      valueKey: "array",
+      fieldProps: {
+        itemType: "text",
+        defaultItemValue: "",
+        arrayItemFieldProps: {
+          header: "header text",
+        },
       },
     },
   ];
